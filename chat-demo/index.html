@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chat Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="app" class="app">
+
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+      <div class="left">‹</div>
+      <div class="title" id="title">R</div>
+      <div class="right">⋯</div>
+    </div>
+
+    <!-- 聊天区 -->
+    <div class="chat-area" id="chatArea">
+      <div class="time-tag" id="initTime"></div>
+      <div id="messages"></div>
+    </div>
+
+    <!-- 输入栏 -->
+    <div class="input-bar">
+      <span class="icon">🎤</span>
+
+      <form id="chatForm">
+        <input
+          id="chatInput"
+          type="text"
+          placeholder=""
+          disabled
+        />
+      </form>
+
+      <div class="right-icons">
+        <button id="sendBtn" class="send-btn hidden">发送</button>
+        <span id="plusIcon" class="icon">＋</span>
+      </div>
+    </div>
+
+    <div class="bottom-safe"></div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

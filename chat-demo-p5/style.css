@@ -1,0 +1,108 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* 改为 hidden，防止整体页面滚动 */
+  position: fixed; /* 添加这行，固定页面 */
+}
+
+body {
+  background: #ffffff;
+}
+
+#app {
+  width: 100%;
+  height: 100dvh;
+  margin: 0 auto;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  font-family: system-ui;
+  overflow: hidden; /* 改为 hidden */
+  box-shadow:
+    inset 1px 0 0 #ffffff,
+    inset -1px 0 0 #ffffff;
+  position: fixed; /* 添加这行 */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.top-bar {
+  height: 52px;
+  background: rgb(231, 255, 255);
+  border-bottom: 1px solid #c4f1fd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-weight: 600;
+  flex-shrink: 0; /* 添加这行，防止压缩 */
+}
+
+.chat-area {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden; /* 添加这行 */
+  padding: 16px;
+  -webkit-overflow-scrolling: touch; /* 添加这行，使滚动更流畅 */
+}
+
+.time-tag {
+  text-align: center;
+  font-size: 12px;
+  background: #dadada;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 6px;
+  margin: 12px auto;
+  display: block;
+  width: fit-content;
+}
+
+.message {
+  display: flex;
+  margin-bottom: 14px;
+}
+
+.message.gA {
+  justify-content: flex-end;
+}
+
+.bubble {
+  max-width: 80%;
+  padding: 8px 10px;
+  border-radius: 12px;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.bubble.gB {
+  background: rgb(231, 255, 255);
+}
+
+.bubble.gA {
+  background: rgb(255, 251, 170);
+  border: 1px solid #fff922;
+}
+
+.input-bar {
+  height: 50px;
+  border-top: 1px solid #ffee00;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  background: #fffdc7;
+  flex-shrink: 0; /* 添加这行，防止压缩 */
+}
+
+input {
+  flex: 1;
+  padding: 6px 8px;
+  font-size: 16px;
+  border-radius: 18px;
+  border: 1px solid #fffb00;
+  outline: none;
+}
