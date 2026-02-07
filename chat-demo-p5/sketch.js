@@ -1,6 +1,6 @@
 // chat-history // mini games // send photos // send when type the right answer //choose between multiple responses
 
-//problem rn: input box; top bar; 
+//problem rn: input box; top bar & upper color; 
 
 // dialogue & plot
 const SCRIPT = [
@@ -9,20 +9,79 @@ const SCRIPT = [
   {
     type: 'gA_simulated_typing',
     content: '有时间吗？我想请你帮点忙。',
-    delay: 1000
+    delay: 3000
   },
-    { type: 'gB', content: '你好，请问是什么忙呢', delay: 1200 },
+    { type: 'gB', content: '你好，请问是什么忙呢', delay: 3000 },
     {
     type: 'gA_simulated_typing',
     content: '哈哈哈，你说话还是这么人机',
-    delay: 1000
+    delay: 2000
   },
   { type: 'gB', content: '。', delay: 1000 },
       {
     type: 'gA_simulated_typing',
     content: '一个art piece 想从我们高中经历找找灵感',
     //simulation: [ '一个art piece', '一个art piece 想从我们高中经历找找灵感'],
-  }
+    delay: 2000
+  },
+        {
+    type: 'gA_simulated_typing',
+    content: '想要一些曾经我们俩的聊天记录，顺便问你点问题',
+    delay: 3000
+  },
+    { type: 'gB', content: '你没吗？【quote:聊天记录】', delay: 2000 }
+    ,
+    { type: 'gB', content: '关于什么？【quote:artpiece】', delay: 2000 },
+            {
+    type: 'gA_simulated_typing',
+    content: '之前我删你的时候就没了',
+    delay: 2000
+  },
+              {
+    type: 'gA_simulated_typing',
+    content: '你聊着聊着就会知道是关于什么的了',
+    delay: 4000
+  },
+              {
+    type: 'gB',
+    content: '为什么问我',
+    delay: 1000
+  },
+                {
+    type: 'gA_simulated_typing',
+    content: '也问了别人。你也是在高中时期之于我很重要的一个人',
+    delay: 1500
+  },
+                  {
+    type: 'gA_simulated_typing',
+    content: '可以吗？这真的对我很重要',
+    delay: 1000
+  },
+                {
+    type: 'gB',
+    content: '1',
+    delay: 5000
+  },
+                    {
+    type: 'gA_simulated_typing',
+    content: '那我问咯？',
+    delay: 2000
+  },
+                      {
+    type: 'gA_simulated_typing',
+    content: '你还记得你第一次找我是因为什么吗？',
+    delay: 3000
+  },
+                  {
+    type: 'gB',
+    content: '不记得，你记得？',
+    delay: 1000
+  },
+                    {
+    type: 'gA_simulated_typing',
+    content: '不记得，但我的笔记本记得。',
+    delay: 4000
+  },
 ];
 
 let step = 0;
