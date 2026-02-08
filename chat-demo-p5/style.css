@@ -89,6 +89,43 @@ body {
   border: 1px solid #fff922;
 }
 
+/* Hint bubble - centered */
+.message.hint-message {
+  justify-content: center;
+}
+
+.bubble.hint {
+  background: #d4edda;
+  /* border: 1px solid #28a745; */
+  color: #155724;
+  font-weight: 500;
+  max-width: 70%;
+}
+
+.bubble.hint.blinking {
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Error message styles */
+.error-icon {
+  color: #dc3545;
+  font-size: 18px;
+  margin-right: 6px;
+  font-weight: bold;
+  align-self: flex-end;
+  line-height: 1.4;
+  padding-bottom: 8px;
+}
+
 .input-bar {
   height: 70px;
   border-top: 1px solid #ffee00;
@@ -106,4 +143,110 @@ input {
   border-radius: 18px;
   border: 1px solid #fffb00;
   outline: none;
+}
+
+/* ========== Fill Blank Styles ========== */
+
+/* Fill Blank Container */
+.fill-blank-container {
+  background: #fffdc7;
+  border-top: 1px solid #ffee00;
+  padding: 15px 20px;
+  max-height: 60vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  flex-shrink: 0;
+}
+
+/* Preview of the message with blanks */
+.fill-blank-preview {
+  background: rgb(255, 251, 170);
+  border: 1px solid #fff922;
+  padding: 10px 12px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #333;
+}
+
+/* Selections area */
+.fill-blank-selections {
+  margin-bottom: 12px;
+}
+
+.blank-section {
+  margin-bottom: 15px;
+}
+
+.blank-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.blank-options {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.option-btn {
+  padding: 8px 16px;
+  border: 1px solid #ffee00;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  outline: none;
+  font-family: system-ui;
+}
+
+.option-btn:hover {
+  background: #fffef0;
+  border-color: #fff922;
+}
+
+.option-btn.selected {
+  background: rgb(255, 251, 170);
+  color: #333;
+  border-color: #fff922;
+  font-weight: 500;
+}
+
+.option-btn:active {
+  transform: scale(0.95);
+}
+
+/* Send button */
+.send-blank-btn {
+  width: 100%;
+  padding: 12px;
+  background: rgb(255, 251, 170);
+  color: #333;
+  border: 1px solid #fff922;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: system-ui;
+}
+
+.send-blank-btn:hover:not([disabled]) {
+  background: #fff922;
+}
+
+.send-blank-btn:active:not([disabled]) {
+  transform: scale(0.98);
+}
+
+.send-blank-btn[disabled] {
+  background: #f0f0f0;
+  border-color: #ddd;
+  color: #999;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
