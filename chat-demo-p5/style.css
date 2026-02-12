@@ -7,7 +7,8 @@ html, body {
 }
 
 body {
-  background:rgb(255, 251, 170);
+  /* background:rgb(253, 255, 199); */
+  background: white;
 }
 
 #app {
@@ -16,7 +17,9 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  font-family: system-ui;
+  /* font-family: system-ui; */
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
   box-shadow:
     inset 1px 0 0 #ffffff,
     inset -1px 0 0 #ffffff;
@@ -45,14 +48,16 @@ body {
   overflow-x: hidden;
   padding: 5px 10px;
   -webkit-overflow-scrolling: touch;
-   background:rgba(255, 255, 255,0.8);
+  /* background: rgba(237, 255, 199, 0.9); */
+  background:rgba(255, 255, 255,0.8);
 }
 
 .time-tag {
   text-align: center;
   font-size: 12px;
-  background: #dadada;
-  color: white;
+  font-style:italic;
+  /* background: #fffbb7; */
+  color: rgb(0, 0, 0,0.9);
   padding: 2px 6px;
   /* border-radius: 6px; */
   margin: 12px auto;
@@ -102,18 +107,18 @@ body {
 
 .bubble.gB {
   color: rgb(84, 0, 87);
-  background: rgba(210, 255, 170, 0.5);
+  font-style: italic;
+  background: #f2ffb7;
 }
 
 .bubble.gA {
-  color: rgb(0, 51, 42);
+  color: rgb(116, 165, 106);
+  font-style: italic;
   background: rgba(255, 231, 243, 0.5);
 }
 
 /* ========== Quote Bubble (below main message) ========== */
 .quote-bubble {
-  background: #e5e5ea;
-  color: #666;
   padding: 4px 8px;
   /* border-radius: 8px; */
   font-size: 11px;
@@ -123,41 +128,17 @@ body {
 }
 
 .quote-bubble.gA {
-  border-right: 2px solid #999;
-  background: #f0f0f0;
-  border-right-color: #666;
+  border-right: 2px solid #ffea00;
+  /* background: #f0f0f0;
+  border-right-color: #666; */
+  background: rgba(252, 255, 156, 0.5);
 }
 
 .quote-bubble.gB {
-  border-left: 2px solid #999;
-  background: #e5e5ea;
-  border-left-color: #666;
-}
-
-/* Hint bubble - centered */
-.message.hint-message {
-  justify-content: center;
-}
-
-.bubble.hint {
-  background: #ffffff;
-  color: #153557;
-  font-style: italic;
-  font-weight: 500;
-  max-width: 70%;
-}
-
-.bubble.hint.blinking {
-  animation: blink 1.5s ease-in-out infinite;
-}
-
-@keyframes blink {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
+  border-left: 2px solid #ffea00;
+  /* background: #e5e5ea;
+  border-left-color: #666; */
+  background: rgba(252, 255, 156, 0.5);
 }
 
 /* Error message styles */
@@ -173,20 +154,36 @@ body {
 }
 
 .input-bar {
-  height: 70px;
   display: flex;
-  align-items: center;
-  padding: 0px 30px 10px 30px;
+  align-items: flex-end;
+  padding: 10px 40px 10px 40px;
   flex-shrink: 0;
 }
 
-input {
+textarea {
+  margin: 0px 0px 20px 0px;
   flex: 1;
   padding: 6px 8px;
   font-size: 16px;
-  /* border-radius: 18px; */
-  border: 1px solid #fffb00;
+  border-color: #dcf075;
   outline: none;
+  color: #000000;
+  -webkit-text-fill-color: #000000;
+  opacity: 1;
+  resize: none;
+  overflow-y: hidden;
+  height: 34px;
+  line-height: 1.4;
+  font-family: 'Courier New', Courier, monospace;
+  box-sizing: border-box;
+}
+
+textarea:disabled {
+  color: #000000;
+  -webkit-text-fill-color: #000000;
+  opacity: 1;
+  background:rgba(255, 255, 255, 0.9);
+  /* background-color: white; */
 }
 
 /* ========== Sticky Note Overlay Styles ========== */
@@ -203,13 +200,14 @@ input {
   z-index: 1000;
   padding: 20px;
   pointer-events: none;
+  background:rgba(255,255,255,0.5)
 }
 
 .sticky-note {
-  background: rgba(255, 191, 217, 0.5);
+  background: rgba(255, 191, 217, 0.9);
   padding: 20px 25px;
   max-width: 320px;
-  width: 90%;
+  width: 80%;
   box-shadow: 
     0 4px 6px rgba(0, 0, 0, 0.1),
     0 10px 20px rgba(0, 0, 0, 0.15);
@@ -227,11 +225,6 @@ input {
     opacity: 1;
     transform: scale(1) translateY(0);
   }
-}
-
-/* Sticky note fold effect */
-.sticky-note {
-  width: 280px;
 }
 
 .sticky-note::before {
@@ -275,7 +268,8 @@ input {
   font-size: 14px;
   transition: all 0.2s;
   outline: none;
-  font-family: system-ui;
+  /* font-family: system-ui; */
+  font-family: 'Courier New', Courier, monospace;
   color: #5a0040;
   font-weight: 500;
 }
@@ -283,4 +277,38 @@ input {
 .sticky-note .option-btn.selected {
   background: #ff007b;
   color: white;
+}
+
+/* Hint above sticky note */
+.hint-above-note {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(227, 255, 165, 0.9);
+  color: #153557;
+  font-style: italic;
+  font-weight: 500;
+  padding: 8px 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+/* .hint-above-note.blinking {
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+} */
+
+.top-bar span:nth-child(2) {
+  color:  #4c007b;
+  background: #f3ffb7
 }

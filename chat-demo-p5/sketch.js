@@ -1,76 +1,220 @@
 //Functions want to initiated: send chat history || take photo & send only if the photo is correct || receive analog signals - or alternative plan || have small games embedded inside
 //problems rn: page moving up when keyboard coming out
 
+// const SCRIPT = [
+//   { type: 'gA_manual', content: 'Hi', delay: 3000 },
+//   { type: 'gB', content: '你好', delay: 4000 },
+//   {
+//     type: 'gA_simulated_typing',
+//     content: '有时间吗？我想请你帮点忙。',
+//     delay: 1000
+//   },
+//   { type: 'gB', content: '你好，请问是什么忙呢', delay: 1500 },
+//   {
+//     type: 'gA_simulated_typing',
+//     content: '哈哈哈，你说话还是这么人机',
+//     delay: 1000
+//   },
+//   { type: 'gB', content: '。', delay: 1500 },
+//   {
+//     type: 'gA_simulated_typing',
+//     content: '一个art piece 想从我们高中经历找找灵感',
+//     delay: 500
+//   },
+//   {
+//     type: 'gA_simulated_typing',
+//     content: '想要一些曾经我们俩的聊天记录',
+//     delay: 1000
+//   },
+//   {
+//     type: 'gA_simulated_typing',
+//     content: '顺便问你点问题',
+//     delay: 1000
+//   },
+//   { 
+//     type: 'gB', 
+//     content: '你没吗？', 
+//     quote: '想要一些曾经我们俩的聊天记录',
+//     delay: 2000 
+//   },
+//   { 
+//     type: 'gB', 
+//     content: '关于什么？', 
+//     quote: '一个art piece 想从我们高中经历找找灵感',
+//     delay: 1000 
+//   },
+//   {
+//     type: 'gA_simulated_typing',
+//     content: '之前我删你的时候就没了',
+//     delay: 1000
+//   },
+//   {
+//     type: 'gA_simulated_typing',
+//     content: '你聊着聊着就会知道是关于什么的了',
+//     delay: 3000
+//   },
+//   {
+//     type: 'gB',
+//     content: '为什么问我',
+//     delay: 1000
+//   },
+//   {
+//     type: 'gA_simulated_typing',
+//     content: '也问了别人',
+//     delay: 1500
+//   },
+//   {
+//     type: 'gA_simulated_typing',
+//     content: '你也是在高中时期之于我很重要的一个人',
+//     delay: 1500
+//   },
+//   {
+//     type: 'gA_simulated_typing',
+//     content: '可以吗？这真的对我很重要',
+//     delay: 1000
+//   },
+//   {
+//     type: 'gB',
+//     content: '1',
+//     delay: 5000
+//   },
+//   {
+//     type: 'gA_simulated_typing',
+//     content: '那我问咯？',
+//     delay: 2000
+//   },
+//   {
+//     type: 'gA_simulated_typing',
+//     content: '你还记得你第一次找我是因为什么吗？',
+//     delay: 3000
+//   },
+//   {
+//     type: 'gB',
+//     content: '不记得，你记得？',
+//     delay: 4000
+//   },
+//   {
+//     type: 'gA_simulated_typing',
+//     content: '不记得，但我的笔记本记得。',
+//     delay: 2000
+//   },
+//     {
+//     type: 'gA_simulated_typing',
+//     content: '9月5号 午休的时候',
+//     delay: 2000
+//   },
+//   {
+//     type: 'gA_fill_blank',
+//     template: '你问了我一道关于___的数学题，答案是___',
+//     blanks: [
+//       {
+//         id: 'blank1',
+//         options: ['数列', '椭圆', '导数']
+//       },
+//       {
+//         id: 'blank2',
+//         options: ['110', '5', '-1']
+//       }
+//     ],
+//     correctAnswers: {
+//       blank1: '数列',
+//       blank2: '110'
+//     },
+//     hint: '-- Open Notebook --',
+//     delay: 2000
+//   },
+//   {
+//     type: 'gB',
+//     content: '你怎么还留着你那本本子',
+//     delay: 2000
+//   }
+// ];
+
 const SCRIPT = [
   { type: 'gA_manual', content: 'Hi', delay: 3000 },
-  { type: 'gB', content: '你好', delay: 4000 },
+  { type: 'gB', content: 'Hello', delay: 4000 },
   {
     type: 'gA_simulated_typing',
-    content: '有时间吗？我想请你帮点忙。',
+    content: 'Do you have time?',
     delay: 1000
   },
-  { type: 'gB', content: '你好，请问是什么忙呢', delay: 1500 },
-  {
+    {
     type: 'gA_simulated_typing',
-    content: '哈哈哈，你说话还是这么人机',
+    content: 'I need your help with something',
     delay: 1000
   },
-  { type: 'gB', content: '。', delay: 1500 },
+  { type: 'gB', content: 'Hi, what do you need help with?', delay: 1500 },
   {
     type: 'gA_simulated_typing',
-    content: '一个art piece 想从我们高中经历找找灵感',
+    content: 'Hahaha',
+    delay: 1000
+  },
+    {
+    type: 'gA_simulated_typing',
+    content: 'you still talk so robotically',
+    delay: 1000
+  },
+  { type: 'gB', content: '.', delay: 1500 },
+  {
+    type: 'gA_simulated_typing',
+    content: 'An art piece',
+    delay: 500
+  },
+    {
+    type: 'gA_simulated_typing',
+    content: 'want some inspiration from our high school experience',
     delay: 500
   },
   {
     type: 'gA_simulated_typing',
-    content: '想要一些曾经我们俩的聊天记录',
+    content: 'I need some of our old chat records',
     delay: 1000
   },
   {
     type: 'gA_simulated_typing',
-    content: '顺便问你点问题',
+    content: 'And I want to ask you some questions',
     delay: 1000
   },
   { 
     type: 'gB', 
-    content: '你没吗？', 
-    quote: '想要一些曾经我们俩的聊天记录',
+    content: "Don't you have them?", 
+    quote: 'I need some of our old chat records',
     delay: 2000 
   },
   { 
     type: 'gB', 
-    content: '关于什么？', 
-    quote: '一个art piece 想从我们高中经历找找灵感',
+    content: 'About what?', 
+    quote: 'An art piece',
     delay: 1000 
   },
   {
     type: 'gA_simulated_typing',
-    content: '之前我删你的时候就没了',
+    content: 'They were gone when I deleted you before',
     delay: 1000
   },
   {
     type: 'gA_simulated_typing',
-    content: '你聊着聊着就会知道是关于什么的了',
+    content: "You'll know what it's about as we chat",
     delay: 3000
   },
   {
     type: 'gB',
-    content: '为什么问我',
+    content: 'Why ask me',
     delay: 1000
   },
   {
     type: 'gA_simulated_typing',
-    content: '也问了别人',
+    content: "I've asked others too",
     delay: 1500
   },
   {
     type: 'gA_simulated_typing',
-    content: '你也是在高中时期之于我很重要的一个人',
+    content: 'You were also a very important person to me during high school',
     delay: 1500
   },
   {
     type: 'gA_simulated_typing',
-    content: '可以吗？这真的对我很重要',
+    content: 'This is really important to me',
     delay: 1000
   },
   {
@@ -80,52 +224,52 @@ const SCRIPT = [
   },
   {
     type: 'gA_simulated_typing',
-    content: '那我问咯？',
+    content: 'So can I ask?',
     delay: 2000
   },
   {
     type: 'gA_simulated_typing',
-    content: '你还记得你第一次找我是因为什么吗？',
+    content: 'Do you remember why you first reached out to me?',
     delay: 3000
   },
   {
     type: 'gB',
-    content: '不记得，你记得？',
-    delay: 1000
+    content: "Don't remember, do you?",
+    delay: 4000
   },
   {
     type: 'gA_simulated_typing',
-    content: '不记得，但我的笔记本记得。',
-    delay: 4000
+    content: "Same. but my notebook does.",
+    delay: 2000
   },
-    {
+  {
     type: 'gA_simulated_typing',
-    content: '9月5号 午休的时候',
-    delay: 4000
+    content: 'Sept 5th during noon nap time',
+    delay: 2000
   },
   {
     type: 'gA_fill_blank',
-    template: '你问了我一道关于___的数学题，答案是___',
+    template: 'You asked me a math problem about ___, and the answer was ___',
     blanks: [
       {
         id: 'blank1',
-        options: ['数列', '椭圆', '导数']
+        options: ['sequences', 'ellipse', 'derivatives']
       },
       {
         id: 'blank2',
-        options: ['110', '5', '-1']
+        options: ['-110', '5', '-1']
       }
     ],
     correctAnswers: {
-      blank1: '数列',
-      blank2: '110'
+      blank1: 'sequences',
+      blank2: '-110'
     },
     hint: '-- Open Notebook --',
     delay: 2000
   },
   {
     type: 'gB',
-    content: '你怎么还留着你那本本子',
+    content: "Why do you still have that notebook",
     delay: 2000
   }
 ];
@@ -133,7 +277,6 @@ const SCRIPT = [
 let step = 0;
 let lastTimeTagTimestamp = null;
 let currentBlanks = {};
-let hintBubble = null;
 
 // DOM elements
 let app, chatArea, inputBar, inputEl, titleEl, fillBlankContainer;
@@ -147,32 +290,38 @@ function setup() {
   // Top bar
   const top = createDiv().class('top-bar').parent(app);
   createSpan('').parent(top);
-  titleEl = createSpan('女同学').parent(top);
+  titleEl = createSpan('z=a+bi').parent(top);
   createSpan('').parent(top);
 
   // Chat area
   chatArea = createDiv().class('chat-area').parent(app);
-  
-  // Initialize time-tag
-  addTimeTag();
 
   // Input bar
   inputBar = createDiv().class('input-bar').parent(app);
-  inputEl = createInput('').parent(inputBar);
+  
+  // Create textarea instead of input
+  inputEl = createElement('textarea').parent(inputBar);
   inputEl.attribute('disabled', true);
+  inputEl.attribute('rows', '1');
 
   inputEl.input(() => {
-    // nothing fancy here yet
+    autoResizeTextarea();
   });
 
   inputEl.elt.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendGaMessage();
     }
   });
 
   runStep();
+}
+
+// Auto-resize textarea based on content
+function autoResizeTextarea() {
+  inputEl.elt.style.height = 'auto';
+  inputEl.elt.style.height = inputEl.elt.scrollHeight + 'px';
 }
 
 // time tag
@@ -191,7 +340,8 @@ function checkAndAddTimeTag() {
   const now = Date.now();
   const fiveMinutes = 5 * 60 * 1000;
   
-  if (!lastTimeTagTimestamp || (now - lastTimeTagTimestamp >= fiveMinutes)) {
+  // If no time tag exists yet, or 5 minutes have passed, add one
+  if (lastTimeTagTimestamp === null || (now - lastTimeTagTimestamp >= fiveMinutes)) {
     addTimeTag();
   }
 }
@@ -236,24 +386,32 @@ function sendGaMessage() {
 
   addMessage('gA', inputEl.value());
   inputEl.value('');
+  inputEl.elt.style.height = 'auto';
   inputEl.elt.blur();
   step++;
   runStep();
 }
 
-function createFillBlankInterface(scriptItem) {
-  // Add hint message to chat area if exists
-  if (scriptItem.hint && !hintBubble) {
-    checkAndAddTimeTag();
-    const hintRow = createDiv().class('message hint-message').parent(chatArea);
-    hintBubble = createDiv(scriptItem.hint).class('bubble hint blinking').parent(hintRow);
-    chatArea.elt.scrollTop = chatArea.elt.scrollHeight;
+async function createFillBlankInterface(scriptItem) {
+  // Show input bar
+  inputBar.style('display', 'flex');
+  inputEl.attribute('disabled', true);
+  inputEl.value('');
+  inputEl.elt.style.height = 'auto';
+  
+  // Type out the template text with blanks showing as ___
+  let displayText = scriptItem.template;
+  let typedText = '';
+  
+  for (let char of displayText) {
+    typedText += char;
+    inputEl.value(typedText);
+    autoResizeTextarea();
+    await sleep(random(40, 80));
   }
   
-  // Show input bar and set the template with blanks
-  inputBar.style('display', 'flex');
-  updateInputPreview(scriptItem);
-  inputEl.attribute('disabled', true);
+  // Wait a moment before showing the sticky note
+  await sleep(500);
   
   // Create overlay sticky note container
   fillBlankContainer = createDiv().class('sticky-note-overlay').parent(app);
@@ -261,10 +419,15 @@ function createFillBlankInterface(scriptItem) {
   // Create the pink sticky note
   const stickyNote = createDiv().class('sticky-note').parent(fillBlankContainer);
   
+  // Add hint above the sticky note if exists
+  if (scriptItem.hint) {
+    createDiv(scriptItem.hint).class('hint-above-note blinking').parent(stickyNote);
+  }
+  
   // Create selection area for each blank
   scriptItem.blanks.forEach((blank, index) => {
     const blankSection = createDiv().class('blank-section').parent(stickyNote);
-    createDiv(`填空 ${index + 1}:`).class('blank-label').parent(blankSection);
+    createDiv(`Blank ${index + 1}:`).class('blank-label').parent(blankSection);
     
     const optionsDiv = createDiv().class('blank-options').parent(blankSection);
     
@@ -299,6 +462,7 @@ function updateInputPreview(scriptItem) {
   });
   
   inputEl.value(text);
+  autoResizeTextarea();
 }
 
 function checkAndAutoSend(scriptItem) {
@@ -346,6 +510,7 @@ function sendFillBlankMessage(scriptItem) {
     
     // Clear input
     inputEl.value('');
+    inputEl.elt.style.height = 'auto';
     
     // Wait a moment then show fill-blank interface again
     setTimeout(() => {
@@ -355,17 +520,14 @@ function sendFillBlankMessage(scriptItem) {
     return; // Don't proceed to next step
   }
   
-  // If correct, stop hint blinking and send normal message
-  if (hintBubble) {
-    hintBubble.removeClass('blinking');
-  }
-  
+  // If correct, send normal message
   addMessage('gA', text);
   
   // Clean up
   fillBlankContainer.remove();
   inputBar.style('display', 'flex');
   inputEl.value('');
+  inputEl.elt.style.height = 'auto';
   currentBlanks = {};
   
   step++;
@@ -377,17 +539,18 @@ async function runStep() {
   const s = SCRIPT[step];
 
   if (s.type === 'gB') {
-    titleEl.html('对方正在输入...');
+    // titleEl.html('对方正在输入...');
+    titleEl.html('Typing...');
     await sleep(s.delay);
-    titleEl.html('R');
-    addMessage('gB', s.content, s.quote); // Pass quote parameter
+    titleEl.html('z=a+bi');
+    addMessage('gB', s.content, s.quote);
     step++;
     runStep();
   }
 
   if (s.type === 'gA_auto') {
     await sleep(s.delay);
-    addMessage('gA', s.content, s.quote); // Pass quote parameter
+    addMessage('gA', s.content, s.quote);
     step++;
     runStep();
   }
@@ -400,12 +563,14 @@ async function runStep() {
   if (s.type === 'gA_simulated_typing') {
     inputEl.attribute('disabled', true);
     inputEl.value('');
+    inputEl.elt.style.height = 'auto';
     await sleep(s.delay);
 
     let txt = '';
     for (let c of s.content) {
       txt += c;
       inputEl.value(txt);
+      autoResizeTextarea();
       await sleep(random(40, 120));
     }
 
