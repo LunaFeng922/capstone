@@ -1,47 +1,57 @@
-//send chat history || take photo & send only if the photo is correct || receive analog signals || have small games embedded inside
+//Functions want to initiated: send chat history || take photo & send only if the photo is correct || receive analog signals - or alternative plan || have small games embedded inside
 //problems rn: page moving up when keyboard coming out
 
 const SCRIPT = [
   { type: 'gA_manual', content: 'Hi', delay: 3000 },
-  { type: 'gB', content: '你好', delay: 1000 },
+  { type: 'gB', content: '你好', delay: 4000 },
   {
     type: 'gA_simulated_typing',
     content: '有时间吗？我想请你帮点忙。',
-    delay: 3000
+    delay: 1000
   },
-  { type: 'gB', content: '你好，请问是什么忙呢', delay: 3000 },
+  { type: 'gB', content: '你好，请问是什么忙呢', delay: 1500 },
   {
     type: 'gA_simulated_typing',
     content: '哈哈哈，你说话还是这么人机',
-    delay: 2000
+    delay: 1000
   },
-  { type: 'gB', content: '。', delay: 1000 },
+  { type: 'gB', content: '。', delay: 1500 },
   {
     type: 'gA_simulated_typing',
     content: '一个art piece 想从我们高中经历找找灵感',
-    delay: 2000
+    delay: 500
   },
   {
     type: 'gA_simulated_typing',
     content: '想要一些曾经我们俩的聊天记录',
-    delay: 3000
+    delay: 1000
   },
-    {
+  {
     type: 'gA_simulated_typing',
     content: '顺便问你点问题',
-    delay: 3000
+    delay: 1000
   },
-  { type: 'gB', content: '你没吗？【quote:聊天记录】', delay: 2000 },
-  { type: 'gB', content: '关于什么？【quote:artpiece】', delay: 2000 },
+  { 
+    type: 'gB', 
+    content: '你没吗？', 
+    quote: '想要一些曾经我们俩的聊天记录',
+    delay: 2000 
+  },
+  { 
+    type: 'gB', 
+    content: '关于什么？', 
+    quote: '一个art piece 想从我们高中经历找找灵感',
+    delay: 1000 
+  },
   {
     type: 'gA_simulated_typing',
     content: '之前我删你的时候就没了',
-    delay: 2000
+    delay: 1000
   },
   {
     type: 'gA_simulated_typing',
     content: '你聊着聊着就会知道是关于什么的了',
-    delay: 4000
+    delay: 3000
   },
   {
     type: 'gB',
@@ -53,7 +63,7 @@ const SCRIPT = [
     content: '也问了别人',
     delay: 1500
   },
-    {
+  {
     type: 'gA_simulated_typing',
     content: '你也是在高中时期之于我很重要的一个人',
     delay: 1500
@@ -88,9 +98,14 @@ const SCRIPT = [
     content: '不记得，但我的笔记本记得。',
     delay: 4000
   },
+    {
+    type: 'gA_simulated_typing',
+    content: '9月5号 午休的时候',
+    delay: 4000
+  },
   {
     type: 'gA_fill_blank',
-    template: '9月5号，午休的时候，你问了我一道关于___的数学题，答案是___',
+    template: '你问了我一道关于___的数学题，答案是___',
     blanks: [
       {
         id: 'blank1',
@@ -105,7 +120,7 @@ const SCRIPT = [
       blank1: '数列',
       blank2: '110'
     },
-    hint: 'OPEN 📒',
+    hint: '-- Open Notebook --',
     delay: 2000
   },
   {
@@ -117,8 +132,8 @@ const SCRIPT = [
 
 let step = 0;
 let lastTimeTagTimestamp = null;
-let currentBlanks = {}; // Store current blank selections
-let hintBubble = null; // Store hint bubble reference
+let currentBlanks = {};
+let hintBubble = null;
 
 // DOM elements
 let app, chatArea, inputBar, inputEl, titleEl, fillBlankContainer;
@@ -131,9 +146,9 @@ function setup() {
 
   // Top bar
   const top = createDiv().class('top-bar').parent(app);
-  createSpan('‹').parent(top);
-  titleEl = createSpan('R').parent(top);
-  createSpan('⋯').parent(top);
+  createSpan('').parent(top);
+  titleEl = createSpan('女同学').parent(top);
+  createSpan('').parent(top);
 
   // Chat area
   chatArea = createDiv().class('chat-area').parent(app);
@@ -181,11 +196,38 @@ function checkAndAddTimeTag() {
   }
 }
 
-function addMessage(sender, text) {
+// Modified addMessage function to support quotes
+function addMessage(sender, text, quotedText = null) {
   checkAndAddTimeTag();
   
-  const row = createDiv().class(`message ${sender}`).parent(chatArea);
-  createDiv(text).class(`bubble ${sender}`).parent(row);
+  if (quotedText) {
+    // Create message container for main message + quote
+    const container = createDiv()
+      .class(`message-container ${sender}`)
+      .parent(chatArea);
+    
+    // Add main message bubble first
+    const row = createDiv()
+      .class(`message ${sender} has-quote`)
+      .parent(container);
+    createDiv(text)
+      .class(`bubble ${sender}`)
+      .parent(row);
+    
+    // Add quote bubble below
+    createDiv(quotedText)
+      .class(`quote-bubble ${sender}`)
+      .parent(container);
+  } else {
+    // Original message without quote
+    const row = createDiv()
+      .class(`message ${sender}`)
+      .parent(chatArea);
+    createDiv(text)
+      .class(`bubble ${sender}`)
+      .parent(row);
+  }
+  
   chatArea.elt.scrollTop = chatArea.elt.scrollHeight;
 }
 
@@ -208,21 +250,20 @@ function createFillBlankInterface(scriptItem) {
     chatArea.elt.scrollTop = chatArea.elt.scrollHeight;
   }
   
-  // Hide input bar
-  inputBar.style('display', 'none');
+  // Show input bar and set the template with blanks
+  inputBar.style('display', 'flex');
+  updateInputPreview(scriptItem);
+  inputEl.attribute('disabled', true);
   
-  // Create fill-blank container as part of app layout (not absolute)
-  fillBlankContainer = createDiv().class('fill-blank-container').parent(app);
+  // Create overlay sticky note container
+  fillBlankContainer = createDiv().class('sticky-note-overlay').parent(app);
   
-  // Display the template with blanks
-  const previewDiv = createDiv().class('fill-blank-preview').parent(fillBlankContainer);
-  updatePreview(scriptItem, previewDiv);
+  // Create the pink sticky note
+  const stickyNote = createDiv().class('sticky-note').parent(fillBlankContainer);
   
   // Create selection area for each blank
-  const selectionsDiv = createDiv().class('fill-blank-selections').parent(fillBlankContainer);
-  
   scriptItem.blanks.forEach((blank, index) => {
-    const blankSection = createDiv().class('blank-section').parent(selectionsDiv);
+    const blankSection = createDiv().class('blank-section').parent(stickyNote);
     createDiv(`填空 ${index + 1}:`).class('blank-label').parent(blankSection);
     
     const optionsDiv = createDiv().class('blank-options').parent(blankSection);
@@ -230,34 +271,26 @@ function createFillBlankInterface(scriptItem) {
     blank.options.forEach(option => {
       const optionBtn = createButton(option).class('option-btn').parent(optionsDiv);
       optionBtn.mousePressed(() => {
-        // Remove selected class from siblings
+        // Remove selected class from all buttons in this blank section
         optionsDiv.elt.querySelectorAll('.option-btn').forEach(btn => {
           btn.classList.remove('selected');
         });
+        
         // Add selected class to clicked button
         optionBtn.elt.classList.add('selected');
+        
         // Store selection
         currentBlanks[blank.id] = option;
-        // Update preview
-        updatePreview(scriptItem, previewDiv);
-        // Check if can send
-        checkCanSend(scriptItem);
+        // Update input preview
+        updateInputPreview(scriptItem);
+        // Check if all filled and auto-send
+        checkAndAutoSend(scriptItem);
       });
     });
   });
-  
-  // Create send button
-  const sendBtn = createButton('发送').class('send-blank-btn').parent(fillBlankContainer);
-  sendBtn.attribute('disabled', true);
-  sendBtn.mousePressed(() => {
-    sendFillBlankMessage(scriptItem);
-  });
-  
-  // Scroll chat area to bottom to show the fill-blank interface is pushing content up
-  chatArea.elt.scrollTop = chatArea.elt.scrollHeight;
 }
 
-function updatePreview(scriptItem, previewDiv) {
+function updateInputPreview(scriptItem) {
   let text = scriptItem.template;
   
   scriptItem.blanks.forEach(blank => {
@@ -265,17 +298,17 @@ function updatePreview(scriptItem, previewDiv) {
     text = text.replace('___', value);
   });
   
-  previewDiv.html(text);
+  inputEl.value(text);
 }
 
-function checkCanSend(scriptItem) {
+function checkAndAutoSend(scriptItem) {
   const allFilled = scriptItem.blanks.every(blank => currentBlanks[blank.id]);
-  const sendBtn = fillBlankContainer.elt.querySelector('.send-blank-btn');
   
   if (allFilled) {
-    sendBtn.removeAttribute('disabled');
-  } else {
-    sendBtn.setAttribute('disabled', true);
+    // Small delay for visual feedback
+    setTimeout(() => {
+      sendFillBlankMessage(scriptItem);
+    }, 300);
   }
 }
 
@@ -297,11 +330,11 @@ function sendFillBlankMessage(scriptItem) {
     }
   }
   
-  // Add message with error icon if incorrect
+  // If incorrect, show error and reset
   if (!isCorrect) {
     checkAndAddTimeTag();
     const row = createDiv().class('message gA error-message').parent(chatArea);
-    createSpan('❗').class('error-icon').parent(row);
+    createSpan('！').class('error-icon').parent(row);
     createDiv(text).class('bubble gA').parent(row);
     chatArea.elt.scrollTop = chatArea.elt.scrollHeight;
     
@@ -310,6 +343,9 @@ function sendFillBlankMessage(scriptItem) {
     
     // Clear current blanks
     currentBlanks = {};
+    
+    // Clear input
+    inputEl.value('');
     
     // Wait a moment then show fill-blank interface again
     setTimeout(() => {
@@ -329,6 +365,7 @@ function sendFillBlankMessage(scriptItem) {
   // Clean up
   fillBlankContainer.remove();
   inputBar.style('display', 'flex');
+  inputEl.value('');
   currentBlanks = {};
   
   step++;
@@ -343,14 +380,14 @@ async function runStep() {
     titleEl.html('对方正在输入...');
     await sleep(s.delay);
     titleEl.html('R');
-    addMessage('gB', s.content);
+    addMessage('gB', s.content, s.quote); // Pass quote parameter
     step++;
     runStep();
   }
 
   if (s.type === 'gA_auto') {
     await sleep(s.delay);
-    addMessage('gA', s.content);
+    addMessage('gA', s.content, s.quote); // Pass quote parameter
     step++;
     runStep();
   }
